@@ -1,5 +1,5 @@
+import type { FilterName } from "./app";
 import { todoCollection } from "./lib/db";
-import type { FilterName } from "./todo-app";
 import { classNames, pluralize } from "./utils";
 
 interface TodoFooterProps {
