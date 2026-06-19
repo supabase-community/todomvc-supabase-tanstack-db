@@ -336,7 +336,7 @@ html .clear-completed:active {
 }
 
 .info {
-  max-width: 32rem;
+  max-width: 36rem;
   margin: 1.25rem auto 2rem;
   text-align: center;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);

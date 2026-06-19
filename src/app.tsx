@@ -112,10 +112,11 @@ export function App() {
             rel="noopener"
             target="_blank"
           >
-            TanStack DB library
+            Supabase+TanStack DB library
           </a>{" "}
           that powers it.
         </p>
+
         <p>
           Open this page in a second tab and edit your todos in either — changes
           sync live.
