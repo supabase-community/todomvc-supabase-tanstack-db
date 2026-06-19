@@ -17,7 +17,9 @@ const ROUTES: Record<string, FilterName> = {
 };
 
 export function App() {
-  const { data: todos } = useLiveQuery((q) => q.from({ todo: todoCollection }));
+  const { data: todos } = useLiveQuery((q) =>
+    q.from({ todo: todoCollection }).orderBy(({ todo }) => todo.title, "asc")
+  );
   const [nowShowing, setNowShowing] = useState<FilterName>("all");
   const [editing, setEditing] = useState<string | null>(null);
 
@@ -81,47 +83,85 @@ export function App() {
   const completedCount = todos.length - activeTodoCount;
 
   return (
-    <section className="todoapp">
-      <header className="header">
-        <h1>todos</h1>
-        <input
-          autoFocus
-          className="new-todo"
-          onKeyDown={handleNewTodoKeyDown}
-          placeholder="What needs to be done?"
-        />
+    <>
+      <h1 className="title">todos</h1>
+      <header className="info">
+        <p>
+          The classic TodoMVC, now built with{" "}
+          <a href="https://supabase.com/" rel="noopener" target="_blank">
+            Supabase
+          </a>{" "}
+          and{" "}
+          <a href="https://tanstack.com/db" rel="noopener" target="_blank">
+            TanStack DB
+          </a>
+          .
+        </p>
+        <p>
+          View{" "}
+          <a
+            href="https://github.com/supabase-community/todomvc-supabase-tanstack-db"
+            rel="noopener"
+            target="_blank"
+          >
+            this demo's source
+          </a>
+          , or explore the{" "}
+          <a
+            href="https://github.com/supabase/tanstack-db"
+            rel="noopener"
+            target="_blank"
+          >
+            TanStack DB library
+          </a>{" "}
+          that powers it.
+        </p>
+        <p>
+          Open this page in a second tab and edit your todos in either — changes
+          sync live.
+        </p>
       </header>
-      {todos.length > 0 && (
-        <section className="main">
+      <section className="todoapp">
+        <header className="header">
           <input
-            checked={activeTodoCount === 0}
-            className="toggle-all"
-            id="toggle-all"
-            onChange={(event) => toggleAll(event.target.checked)}
-            type="checkbox"
+            autoFocus
+            className="new-todo"
+            onKeyDown={handleNewTodoKeyDown}
+            placeholder="What needs to be done?"
           />
-          <label htmlFor="toggle-all">Mark all as complete</label>
-          <ul className="todo-list">
-            {shownTodos.map((todo) => (
-              <TodoItem
-                editing={editing === todo.id}
-                key={todo.id}
-                onCancel={() => setEditing(null)}
-                onEdit={() => setEditing(todo.id)}
-                onSave={() => setEditing(null)}
-                todo={todo}
-              />
-            ))}
-          </ul>
-        </section>
-      )}
-      {(activeTodoCount > 0 || completedCount > 0) && (
-        <TodoFooter
-          completedCount={completedCount}
-          count={activeTodoCount}
-          nowShowing={nowShowing}
-        />
-      )}
-    </section>
+        </header>
+        {todos.length > 0 && (
+          <section className="main">
+            <input
+              checked={activeTodoCount === 0}
+              className="toggle-all"
+              id="toggle-all"
+              onChange={(event) => toggleAll(event.target.checked)}
+              type="checkbox"
+            />
+            <label htmlFor="toggle-all">Mark all as complete</label>
+            <ul className="todo-list">
+              {shownTodos.map((todo) => (
+                <TodoItem
+                  editing={editing === todo.id}
+                  key={todo.id}
+                  onCancel={() => setEditing(null)}
+                  onEdit={() => setEditing(todo.id)}
+                  onSave={() => setEditing(null)}
+                  todo={todo}
+                />
+              ))}
+            </ul>
+          </section>
+        )}
+        {(activeTodoCount > 0 || completedCount > 0) && (
+          <TodoFooter
+            completedCount={completedCount}
+            count={activeTodoCount}
+            nowShowing={nowShowing}
+          />
+        )}
+      </section>
+    </>
   );
 }

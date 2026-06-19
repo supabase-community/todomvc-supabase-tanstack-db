@@ -47,7 +47,7 @@ body {
 
 .todoapp {
   position: relative;
-  margin: 130px 0 40px 0;
+  margin: 0 0 40px 0;
   background: #fff;
   box-shadow:
     0 2px 4px 0 rgba(0, 0, 0, 0.2),
@@ -72,16 +72,15 @@ body {
   color: #e6e6e6;
 }
 
-.todoapp h1 {
-  position: absolute;
-  top: -155px;
-  width: 100%;
-  font-size: 100px;
+.title {
+  margin: 5rem 0 0;
+  font-size: clamp(4.5rem, 18vw, 6.25rem);
   font-weight: 100;
+  line-height: 1;
   color: rgba(175, 47, 47, 0.15);
   text-align: center;
-  -moz-text-rendering: optimizeLegibility;
-  -webkit-text-rendering: optimizeLegibility;
+  /* letter-spacing: -0.03em; */
+  text-wrap: balance;
   text-rendering: optimizeLegibility;
 }
 
@@ -337,15 +336,27 @@ html .clear-completed:active {
 }
 
 .info {
-  margin: 20px auto 30px;
-  font-size: 15px;
-  color: #4d4d4d;
+  max-width: 32rem;
+  margin: 1.25rem auto 2rem;
   text-align: center;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .info p {
-  line-height: 1.4;
+  margin: 0.5rem 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #555;
+}
+
+.info p:first-child {
+  margin-bottom: 0.75rem;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.35;
+  color: #2e2e2e;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
 }
 
 .info a {
